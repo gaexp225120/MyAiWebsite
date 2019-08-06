@@ -207,9 +207,8 @@ def DetectFace(str_targetImg, detectMode, str_fileName):
     elif detectMode == 2:
         result_img =  bl.showEmotions(str_targetImg, j_faces)
     else:
-        return "please input valid mode."
-    
-    
+        return "please input valid mode."  
+
     bl.saveImg(result_img, str_fileName)
     
     return result_img
