@@ -15,7 +15,7 @@
     <body class="is-preload">
         <!-- Header -->
             <header id="header">
-                <a class="logo" href="index.html">FaceDetect</a>
+                <a class="logo" href="{{ url_for('back') }}">FaceDetect</a>
                 <nav>
                     <a href="#menu">Menu</a>
                 </nav>
@@ -24,8 +24,8 @@
         <!-- Nav -->
             <nav id="menu">
                 <ul class="links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="generic.html">Generic</a></li>
+                    <li><a href="{{ url_for('back') }}">Home</a></li>
+                    <li><a href="{{ url_for('age') }}">登陸</a></li>
                 </ul>
             </nav>
         <!-- Banner -->
@@ -60,7 +60,7 @@
                                     <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a><br>
                                     Enter the URL<br> click the <strong>Analyze face</strong> button.<br><br>
                                     <!--分析圖片<-->
-                                    <form action="/detect" method="post" enctype="multipart/form-data">
+                                    <form action="/showEmotions" method="post" enctype="multipart/form-data">
                                         Image to analyze: 
                                         <input type="text" name="inputImage" id="inputImage"/><br><br>
                                         <button onclick="TheAlert2()" value =upload >上傳 </button>
@@ -80,23 +80,9 @@
                                 </header>
                                 <form action="/handleUpload" method="post" enctype="multipart/form-data">
                                     Choose the file: 
-                            
-                                    <br><br><br>
-                                    <input type="file" name="photo" id= "imgFile" onchange="showImg(this)" /><br><br>
-                                    <button onclick="TheAlert()" id = button  value =upload >上傳檔案至本地端 </button>
-                                    <br><br>
                                     <img id="sourceImage" width="400"/>
                                     <!-- <input type="button" id="btnUpload" value="上傳" onclick="upload()" /><div id="progress" style="width:200px;height:24px;"></div> -->
                                     <p id="showimg"></p>
-                                    <script>
-                                        function TheAlert() {
-                                            if (document.getElementById('imgFile').value != ""){
-                                                alert("上傳成功!");
-                                            } else {
-                                                alert("請選擇檔案!");
-                                            }
-                                        }
-                                    </script>
                                 </form> 
                             </div>
                         </section>
@@ -112,7 +98,6 @@
                 </div>
             </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script src="{{url_for('static', filename='js/facedect.js')}}"></script>
         <script src="{{url_for('static', filename='js/im.js')}}"></script>
         <script src="{{url_for('static', filename='js/imgur.js')}}"></script>
         <script src="{{url_for('static', filename='js/upload.js')}}"></script>
@@ -121,6 +106,5 @@
         <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
         <script src="{{url_for('static', filename='js/util.js')}}"></script>
         <script src="{{url_for('static', filename='js/main.js')}}"></script>
-
     </body>
 </html>

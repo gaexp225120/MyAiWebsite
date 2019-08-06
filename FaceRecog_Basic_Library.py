@@ -75,18 +75,22 @@
 #**   - 3 getIdentifyName(li_targetFaces, str_groupId)
 #**   - 4 showName(li_targetFaces, str_targetImg, j_faces)
 #**   - 5 getSimilarImgUrl(str_FLfaceId, str_faceListId)
+#**   - 6 showAge(str_targetImg, j_faces)
+#**   - 7 showEmotions(str_targetImg, j_faces)
+#**   - 8 saveImg(img, str_fileName)
 #**
 #*************************
 
 
-# In[16]:
+# In[2]:
 
 
 ### Basic Setting
 
 import requests
 import json
-from matplotlib.pyplot import imshow
+#from matplotlib.pyplot import imshow
+import matplotlib.pyplot as plt
 import cognitive_face as CF
 from io import BytesIO #for open graphics??
 from PIL import Image, ImageDraw, ImageFont
@@ -121,7 +125,7 @@ headers = {
 }
 
 
-# In[3]:
+# In[5]:
 
 
 #*************************
@@ -161,7 +165,7 @@ def Detect(str_targetImg):
 #*************************
 
 
-# In[8]:
+# In[4]:
 
 
 #*************************
@@ -285,7 +289,7 @@ def Identify(li_targetFaces, str_groupId):
 #*************************
 
 
-# In[ ]:
+# In[4]:
 
 
 #*************************
@@ -299,28 +303,21 @@ def Identify(li_targetFaces, str_groupId):
 #**
 #*************************
 
-def Verify():
+def Verify(str_faceId1, str_faceId2):
     
-#     #-- Request body
-#     body = dict()
-#     body["url"] = str_targetImg
-#     body = str(body)
+    #-- Request body
+    body = dict()
+    body["faceId1"] = str_faceId1
+    body["faceId2"] = str_faceId2
+    body = str(body)
     
-#     #-- Request parameters
-#     params_detect = {
-#         'returnFaceId': 'true',
-#         'returnFaceLandmarks': 'false',
-#         'recognitionModel': 'recognition_02',
-#         'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise',
-#     }
+    #-- Requet url
+    str_apiUrl_Verify = BASE_URL + 'verify'
 
-#     #-- Requet url
-#     str_apiUrl_Detect = BASE_URL + 'detect'
-
-#     #-- call api
-#     response_detect = requests.post(str_apiUrl_Detect, params=params_detect, data=body, headers=headers)
+    #-- call api
+    response_verify = requests.post(str_apiUrl_Verify, data=body, headers=headers)
     
-     return None
+    return response_verify
 
 #*************************
 
@@ -333,7 +330,7 @@ def Verify():
 #VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV OPERATE VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 
 
-# In[6]:
+# In[79]:
 
 
 #*************************
@@ -352,15 +349,17 @@ def getRectangle(dic_face):
     faceRect = dic_face['faceRectangle']
     left = faceRect['left']
     top = faceRect['top']
-    bottom = left + faceRect['height']
-    right = top + faceRect['width']
+    bottom = top + faceRect['height']
+    right = left + faceRect['width']
     
-    return ((left, top), (bottom, right))
+    #print("GR left: "+str(left) + ", bottom: "+str(bottom))
+    
+    return ((left, top), (right, bottom))
 
 #*************************
 
 
-# In[7]:
+# In[72]:
 
 
 #*************************
@@ -431,7 +430,7 @@ def getIdentifyName(li_targetFaces, str_groupId):
 #*************************
 
 
-# In[16]:
+# In[9]:
 
 
 #*************************
@@ -457,8 +456,8 @@ def showName(li_targetFaces, str_targetImg, j_faces):
             #rect = li_faces[i]['faceRectangle']
             left = coordinates[0][0]
             top = coordinates[0][1]
-            bottom = coordinates[1][0]
-            right = coordinates[1][1]
+            right = coordinates[1][0]
+            bottom = coordinates[1][1]
 
             largefont = ImageFont.truetype("calibri.ttf",20)
             draw = ImageDraw.Draw( img )
@@ -470,7 +469,7 @@ def showName(li_targetFaces, str_targetImg, j_faces):
 #*************************
 
 
-# In[14]:
+# In[10]:
 
 
 #*************************
@@ -498,6 +497,128 @@ def getSimilarImgUrl(str_FLfaceId, str_faceListId):
             result_Img = j_getFLfaces[i]['userData']
         
     return result_Img
+
+#*************************
+
+
+# In[73]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** O - 6
+#** Function Name: showAge(str, json)
+#** Description: show detected face's age
+#** Parameters: 
+#** -- str_targetImg: url of target image.
+#** -- j_faces: result in json format from Detect().
+#**
+#*************************
+
+def showAge(str_targetImg, j_faces):
+    
+    img = drawRect(str_targetImg, j_faces)
+    
+    for face in j_faces:
+        coordinates = getRectangle(face)
+        left = coordinates[0][0]
+        top = coordinates[0][1]
+        bottom = coordinates[1][1]
+        
+#         print("SA left: "+str(left) + ", bottom: "+str(bottom) + ", top: "+str(top))
+#         print("height: "+str(face['faceRectangle']['height']))
+        
+        str_age = "Age: " + str(face['faceAttributes']['age'])
+
+        largefont = ImageFont.truetype("calibri.ttf",30)
+        draw = ImageDraw.Draw( img )
+        draw.text( (left, bottom+10), str_age, font = largefont, fill=(255,0,0,255))
+        
+    return img
+
+#*************************
+
+
+# In[88]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** O - 7
+#** Function Name: showEmotions(str, json)
+#** Description: show detected face's emotions
+#** Parameters:
+#** -- str_targetImg: url of target image.
+#** -- j_faces: result in json format from Detect().
+#**
+#*************************
+
+def showEmotions(str_targetImg, j_faces):
+    
+    img = drawRect(str_targetImg, j_faces)
+    
+    for face in j_faces:
+        coordinates = getRectangle(face)
+        left = coordinates[0][0]
+        bottom = coordinates[1][1]
+        
+        temp_emotion = ""
+        dic_emotion = face['faceAttributes']['emotion']
+        
+        for emotion in dic_emotion:
+            if dic_emotion[emotion] != 0:
+                temp_emotion = temp_emotion + emotion + ": " + str(dic_emotion[emotion]) + "\n"
+        
+        if len(temp_emotion) != 0:
+            str_emotion = temp_emotion[:-2]
+        else:
+            str_emotion = temp_emotion
+        
+        largefont = ImageFont.truetype("calibri.ttf",18)
+        draw = ImageDraw.Draw( img )
+        draw.text( (left, bottom+5), temp_emotion, font = largefont, fill=(255,0,0,255))
+        
+    return img
+
+#*************************
+
+
+# In[115]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** O - 8
+#** Function Name: saveImg(img, str)
+#** Description: save the image
+#** Parameters:
+#** -- img: temp img want to save as jpg file.
+#** -- str_fileName: file name.
+#**
+#*************************
+
+def saveImg(img, str_fileName):
+    
+    plt.figure(figsize = (8,6))
+    plt.imshow(img)
+    plt.axis('off')
+    
+    plt.gca().xaxis.set_major_locator(plt.NullLocator()) 
+    plt.gca().yaxis.set_major_locator(plt.NullLocator())
+    plt.subplots_adjust(top=1,bottom=0,left=0,right=1,hspace=0,wspace=0)
+    plt.margins(0,0)
+    
+    #plt.show()
+    
+    str_fileName = str_fileName + ".jpg"
+    
+    # save
+    plt.savefig(str_fileName,bbox_inches='tight',dpi=600,pad_inches=0.0)
+    
+    return None
 
 #*************************
 
@@ -634,6 +755,60 @@ def getSimilarImgUrl(str_FLfaceId, str_faceListId):
 
 # getURL = getSimilarImgUrl(str_FLfaceId, str_faceListId)
 # print(getURL)
+
+
+# In[78]:
+
+
+### test show age
+#-- 1 detect
+# result_detect = Detect(str_targetImg)
+# j_faces = result_detect.json()
+
+# #print(json.dumps(j_faces, sort_keys=True, indent=2))
+
+# re_img = showAge(str_targetImg, j_faces)
+# imshow(re_img)
+# re_img.show()
+
+
+# In[116]:
+
+
+### test show emotion
+
+# result_detect = Detect(str_targetImg)
+# j_faces = result_detect.json()
+
+#re_emo = showEmotions(str_targetImg, j_faces)
+# plt.figure(figsize = (15,8))
+# plt.axis('off')
+
+# # plt.gca().xaxis.set_major_locator(plt.NullLocator()) 
+# # plt.gca().yaxis.set_major_locator(plt.NullLocator()) 
+# plt.subplots_adjust(top=1,bottom=0,left=0,right=1,hspace=0,wspace=0) 
+# plt.margins(0,0)
+
+# imshow(re_emo)
+#re_emo.show()
+
+# saveImg(re_emo, "test")
+
+
+# In[6]:
+
+
+### test verify
+
+# img1 = "http://i.epochtimes.com/assets/uploads/2018/11/1811282149341487-600x400.jpg"
+# img2 = "https://fpscdn.yam.com/news/201702/0e/b7/58a50182c0eb7.jpg"
+
+# str_faceId1 = Detect(img1).json()[0]['faceId']
+# str_faceId2 = Detect(img2).json()[0]['faceId']
+
+# result_verify = Verify(str_faceId1, str_faceId2)
+
+# print(json.dumps(result_verify.json()))
 
 
 # In[ ]:

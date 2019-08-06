@@ -3,7 +3,7 @@ var feedback = function(res) {
         var get_link = res.data.link.replace(/^http:\/\//i, 'https://');
         document.querySelector('.status').classList.add('bg-success');
         document.querySelector('.status').innerHTML =
-            'Image : ' + '<br><input class="image-url" value=\"' + get_link + '\"/>';
+            'Url : ' + '<br><input class="image-url" value=\"' + get_link + '\"/>';
     }
 };
 

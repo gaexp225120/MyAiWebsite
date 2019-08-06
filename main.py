@@ -7,6 +7,8 @@ import FaceRecog_FaceList_Library
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+imgSavePath = 'C:/Users/user/Desktop/Faceapi/Flask/test/Pictures/imgno'
+tempFileName = 1
 
 @app.route('/')
 def index():
@@ -15,13 +17,31 @@ def index():
 
 
 
-@app.route("/detect", methods=['POST'])
+@app.route("/showEmotions", methods=['POST'])
 
-def detect():	
+def showEmotions():
+	global tempFileName
 	str_targetImg=request.values['inputImage']  
-	detectMode=0
+	detectMode=2
+	str_filename=imgSavePath+str(tempFileName)+'.jpg'
 	try:
-		FA.DetectFace(str_targetImg, detectMode)
+		=FA.DetectFace(str_targetImg, detectMode ,str_filename)
+		tempFileName=tempFileName+1
+	except AttributeError:
+		print("Couldn't save image {}")
+	return redirect(url_for('index'))
+
+
+@app.route("/showAge", methods=['POST'])
+
+def showAge():	
+	global tempFileName
+	str_targetImg=request.values['inputImage']  
+	detectMode=1
+	str_filename=imgSavePath+str(tempFileName)+'.jpg'
+	try:
+		FA.DetectFace(str_targetImg, detectMode ,str_filename)
+		tempFileName=tempFileName+1
 	except AttributeError:
 		print("Couldn't save image {}")
 	return redirect(url_for('index'))
@@ -36,6 +56,15 @@ def handleUpload():
             photo.save(os.path.join('C:/Users/user/Desktop/Faceapi/Flask/test/Pictures', photo.filename))
     return redirect(url_for('index'))
 
+@app.route('/age')
+
+def age():
+	return render_template('age.html')
+
+@app.route('/')
+
+def back():
+	return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

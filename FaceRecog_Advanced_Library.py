@@ -1,7 +1,86 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[ ]:
+
+
+#**********************************************************************
+#********************** Program Note Description **********************
+#**********************************************************************
+#
+# Description: set out the rules of comments and coding
+# [Name] -- camelCase_classify
+# -- Program File Name: 'Suject'_'date(if need)'_'subtitle(if need)'
+# -- Variable Name: 'dataType(if is known)'_'Objective'_'number/diff. obj(if need)'
+# [Rules] -- comments
+# -- every code file should include this description at the top
+# -- every code file should indicate the creator, subject and start date
+# -- ### (subject of a cell)
+# -- #-- (describe the purpose of below section)
+# -- #---- (second level description)(every level get two moer '-' and so on)
+# -- notice there is always a space between the sign and characters
+#
+#**********************************************************************
+
+#-- Function Format --
+
+#*************************
+#** Function *************
+#*************************
+#**
+#** Function Name: func(str, str, str)
+#** Description: ...
+#** Parameters: 
+#** -- str_xxx: ...
+#** -- str_yyy: ...
+#** -- str_zzz: ...
+#**
+#*************************
+
+# def func():
+#     ...
+
+#*************************
+
+
+# In[ ]:
+
+
+#**********************************************************************
+#****************************** NEW WIDE ******************************
+#**********************************************************************
+#** Project: FaceRecog_Advanced_Library                              **
+#** Creator: Judy Tang                                               **
+#** Start Date: 2019/07/26                                           **
+#** Description: complex operation of basic functions                **
+#**********************************************************************
+
+
+# In[ ]:
+
+
+#*************************
+#** Content **************
+#*************************
+#**
+#** -- Advances --
+#** A - 1 IdentifyPerson(str_targetImg, str_groupId)
+#**   - 2 DetectFace(str_targetImg, detectMode, str_fileName)
+#**   - 3 FindTheMostSimilar(str_targetImg, str_faceListId)
+#**   - 4 
+#**   - 5 
+#**
+#*************************
+
+
+# In[1]:
+
+
+### Basic Setting
+
 import requests
 import json
 from matplotlib.pyplot import imshow
-import matplotlib.pyplot as plt
 import cognitive_face as CF
 from io import BytesIO #for open graphics??
 from PIL import Image, ImageDraw, ImageFont
@@ -37,6 +116,20 @@ headers = {
 }
 
 
+# In[2]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** A - 1
+#** Function Name: IdentifyPerson(str, str)
+#** Description: Complete process of identify. Input url of target image and get indicated image as result.
+#** Parameters: 
+#** -- str_targetImg: url of target image.
+#** -- str_groupId: the group(id) of those known people want to recognize on target image.
+#**
+#*************************
 
 def IdentifyPerson(str_targetImg, str_groupId):
     
@@ -64,27 +157,90 @@ def IdentifyPerson(str_targetImg, str_groupId):
     
     return result_img
 
+#*************************
 
-imgSavePath = 'C:/Users/user/Desktop/Faceapi/Flask/test/Pictures/imgno'
-tempFileName = 1
-def DetectFace(str_targetImg, detectMode):
-    global tempFileName
-    filename=imgSavePath+str(tempFileName)+'.jpg'
+
+# In[7]:
+
+
+### identify
+#-- parameters
+# #str_targetImg = str_targetImg
+# str_groupId = str_personGroupId_test02
+
+# recogImg = IdentifyPerson(str_targetImg, str_groupId)
+
+# imshow(recogImg)
+# recogImg.show()
+
+
+# In[2]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** A - 2
+#** Function Name: DetectFace(str, int, str)
+#** Description: Complete process of detect. Input url of target image and show detected information on image.
+#** Parameters: 
+#** -- str_targetImg: url of target image.
+#** -- detectMode: diffrient mode for different result on image.
+#** -- str_fileName: specifying the name to save the result image.
+#**
+#*************************
+
+def DetectFace(str_targetImg, detectMode, str_fileName):
+    
     #-- 1. detect
     result_detect = bl.Detect(str_targetImg)
     j_faces = result_detect.json()
     
     #-- 2. deal with different mode
+    #---- mode 0: only draw retangle on the image
     if detectMode == 0:
         result_img =  bl.drawRect(str_targetImg, j_faces)
+    #---- mode 1: show age on the image
+    elif detectMode == 1:
+        result_img =  bl.showAge(str_targetImg, j_faces)
+    #---- mode 2: show emotions on the image
+    elif detectMode == 2:
+        result_img =  bl.showEmotions(str_targetImg, j_faces)
+    else:
+        return "please input valid mode."
     
-    #result_img.savefig('test.jpg')
-    #plt.savefig('test.jpg')
-    plt.imshow(result_img)
-    plt.axis('off')
-    #plt.show()
-    plt.savefig(filename)#儲存圖片
-    tempFileName=tempFileName+1
+    
+    bl.saveImg(result_img, str_fileName)
+    
+    return result_img
+
+#*************************
+
+
+# In[5]:
+
+
+# recogImg = DetectFace(str_targetImg, 2, "test0805-3")
+
+# imshow(recogImg)
+# recogImg.show()
+
+
+# In[4]:
+
+
+#*************************
+#** Function *************
+#*************************
+#** A - 3
+#** Function Name: FindTheMostSimilar(str, str)
+#** Description: Complete process of find similar. Input url of target image and get the most similar image.
+#** Parameters: 
+#** -- str_targetImg: url of target image.
+#** -- str_faceListId: the group(id) of those known people want to recognize on target image.
+#**
+#*************************
+
 def FindTheMostSimilar(str_targetImg, str_faceListId):
     
     int_maxNum = 1
@@ -110,6 +266,20 @@ def FindTheMostSimilar(str_targetImg, str_faceListId):
     
     return result_img
 
+#*************************
+
+
+# In[5]:
+
+
+# str_targetImg = "http://www.newwide.com/AI/Angela1.jpg"
+
+# smrImg = FindTheMostSimilar(str_targetImg, str_faceListId)
+# imshow(smrImg)
+# # recogImg.show()
+
+
+# In[ ]:
 
 
 
