@@ -25,7 +25,7 @@ def showEmotions():
 	detectMode=2
 	str_filename=imgSavePath+str(tempFileName)+'.jpg'
 	try:
-		=FA.DetectFace(str_targetImg, detectMode ,str_filename)
+		FA.DetectFace(str_targetImg, detectMode ,str_filename)
 		tempFileName=tempFileName+1
 	except AttributeError:
 		print("Couldn't save image {}")
