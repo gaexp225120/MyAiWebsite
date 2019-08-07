@@ -46,15 +46,14 @@ def showAge():
 		print("Couldn't save image {}")
 	return redirect(url_for('age'))
 
+# @app.route("/handleUpload", methods=['POST'])
 
-@app.route("/handleUpload", methods=['POST'])
-
-def handleUpload():
-    if 'photo' in request.files:
-        photo = request.files['photo']
-        if photo.filename != '':            
-            photo.save(os.path.join('C:/Users/user/Desktop/Faceapi/Flask/test/Pictures', photo.filename))
-    return redirect(url_for('index'))
+# def handleUpload():
+#     if 'photo' in request.files:
+#         photo = request.files['photo']
+#         if photo.filename != '':            
+#             photo.save(os.path.join('C:/Users/user/Desktop/Faceapi/Flask/test/Pictures', photo.filename))
+#     return redirect(url_for('index'))
 
 @app.route('/age')
 
