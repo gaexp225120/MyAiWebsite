@@ -44,7 +44,7 @@ def showAge():
 		tempFileName=tempFileName+1
 	except AttributeError:
 		print("Couldn't save image {}")
-	return redirect(url_for('index'))
+	return redirect(url_for('age'))
 
 
 @app.route("/handleUpload", methods=['POST'])
