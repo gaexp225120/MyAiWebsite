@@ -131,7 +131,7 @@ def DetectFace(str_targetImg, detectMode, str_fileName):
     else:
         return "please input valid mode."  
 
-    #bl.saveImg(result_img, str_fileName)
+    bl.saveImg(result_img, str_fileName)
     
     return result_img
 
