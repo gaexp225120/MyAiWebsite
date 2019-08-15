@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<!--
+    Industrious by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title>Industrious by TEMPLATED</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-style.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='css/favicon.png') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body class="is-preload">
+        <!-- Header -->
+        <header id="header">
+            <a class="logo" href="{{ url_for('back') }}">FaceDetect</a>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="{{ url_for('back') }}">Home</a></li>
+                <li><a href="{{ url_for('Emotions') }}">情感偵測</a></li>
+                <li><a href="{{ url_for('age') }}">年齡偵測</a></li>
+            </ul>
+        </nav>
+        <!-- Banner -->
+        <section id="banner">
+            <div class="inner">
+                <h1>FaceDetect</h1>
+                <p>臉部測試網站測試測試測試測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試</p>
+            </div>
+        </section>
+
+        <!-- Highlights -->
+        <section class="wrapper">
+            <div class="inner">
+                <header class="special">
+                    <h2>測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試測試</h2>
+                    <p style="color:blue;font-size: 60px">年齡偵測</p>
+                </header>
+                <div class="highlights">
+                    <section>
+                        <div class="title">
+                            <h1>Imgur Upload API</h1>
+                            <p>圖片上傳</p>
+                        </div>
+                        <div class="dropzone">
+                            <div class="info"></div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="content">
+                            <header>
+                                <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a><br>
+                                Enter the URL<br> click the <strong>Analyze face</strong> button.<br><br>
+                                <!--分析圖片<-->
+                                <form action="/showAge" method="post" enctype="multipart/form-data">
+                                    Image to analyze: 
+                                    <input class="urlarea" type="text" placeholder="輸入網址" name="inputImage" id="inputImage"/><br><br>
+                                    <button onclick="TheAlert2()" value =upload >上傳 </button>
+                                    <script>
+                                        function TheAlert2() {
+                                            alert("上傳成功!");
+                                        }
+                                    </script>
+                                </form> 
+                            </header>
+                        </div>
+                    </section>
+                        <section>
+                            <div class="content">
+                                <header>
+                                    <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
+                                </header>
+                                <form action="/handleUpload" method="post" enctype="multipart/form-data">
+                                    Choose the file: 
+                                    <img id="sourceImage" width="400"/>
+                                    <!-- <input type="button" id="btnUpload" value="上傳" onclick="upload()" /><div id="progress" style="width:200px;height:24px;"></div> -->
+                                    <p id="showimg"></p>
+                                </form> 
+                            </div>
+                        </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="cta" class="wrapper">
+            <div class="inner">
+                <h2>Curabitur ullamcorper ultricies</h2>
+                <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+            </div>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='js/im.js')}}"></script>
+        <script src="{{url_for('static', filename='js/imgur.js')}}"></script>
+        <script src="{{url_for('static', filename='js/upload.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/util.js')}}"></script>
+        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.standalone.min.css">
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico"> --> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nucleo-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/now-ui-kit.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='css/favicon.png') }}">
+  <!--  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> -->
+
+  <title>Now UI Kit by Creative Tim </title>
+  <meta name="description" content="Start your development with a beautiful Bootstrap 4 UI kit. It is yours Free.">
+  <meta name="keywords" content="bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, now ui, now ui kit, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
+</head>
+<body class="">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark
+  fixed-top">
+  <div class="container"> <a class="navbar-brand" href="#">
+    <i class="fa d-inline fa-apple fa-2x"></i>
+    <b class="" href="{{ url_for('back') }}" >FaceApi</b>
+  </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar10">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"> <a class="nav-link" href="{{ url_for('back') }}">回到首頁</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{{ url_for('Emotions') }}">情感偵測</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="{{ url_for('age') }}">年齡偵測</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="#title">Go To Middle</a> </li>
+    </ul>
+  </div>
+</div>
+</nav>
+<div class="text-center parallax cover  py-5" style="background-image: url(&quot;{{ url_for('static', filename='img/header.jpg')}}&quot;);position:relative;background-position:center center;background-size:cover;">
+  <div class="container d-flex flex-column">
+    <div class="row my-auto">
+      <div class="col-md-12 text-white">
+        <img class="mb-5" src="{{ url_for('static', filename='img/now-logo.png') }}" width="100">
+        <h1 class="mb-3 display-1">NOW UI KIT.</h1>
+        <h3 class="mb-5" >A beautiful Bootstrap 4 UI kit. Yours free.</h3>
+        <a href="#title" style="color:#FFFFFF ; font size:20px;">GO to Detect page<a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 p-3 col-md-12">
+        <div class="title" id = "title">
+          <h1>Imgur Upload API</h1>
+          <p>圖片上傳</p>
+        </div>
+        <div class="dropzone">
+          <div class="info"></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>情緒辨識</h1>
+          <p class="mb-4">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>
+          <div class="row">
+            <div class="col-md-3 order-3 order-md-1"> 
+              <img class="img-fluid d-block" id = 'preimg' src="" onchange="myFunction(this.src)" > 
+              <script>
+                function myFunction() {
+                  document.getElementById('inputImage').value =imgtest ;;
+                }
+              </script>
+            </div>
+            <div class="col-md-6 col-8 d-flex flex-column justify-content-center p-3 order-1 order-md-2">
+              <h3>Mere tranquil existence</h3>
+              <form action="/showEmotions" method="post" enctype="multipart/form-data">
+                Image to analyze: 
+                <input class="urlarea" type="text" placeholder="輸入網址" name="inputImage" id="inputImage" ><br><br>
+                <button class="btn btn-primary mb-3" onclick="TheAlert2()" value =upload >上傳 </button>
+                <script>
+                  function TheAlert2() {
+                    alert("上傳成功!");
+                  }
+                </script>
+              </form> 
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="py-5 text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 p-3">
+          <h1 class="mb-0">Call your visitors to act. Now</h1>
+        </div>
+        <div class="col-md-3 align-items-center d-flex justify-content-center p-3"> <a class="btn btn-primary btn-lg" href="{{ url_for('Emotions') }}" >Get your license</a> </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="{{url_for('static', filename='js/parallax.js')}}"></script>
+  <script src="{{url_for('static', filename='js/navbar-ontop.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+  <!--    NEW TOP -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="{{url_for('static', filename='js/im.js')}}"></script>
+  <script src="{{url_for('static', filename='js/imgur.js')}}"></script>
+  <script src="{{url_for('static', filename='js/upload.js')}}"></script>
+  <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/util.js')}}"></script>
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+  <!--    NEW TOP -->
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<!--
+    Industrious by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title>Industrious by TEMPLATED</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-style.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='css/favicon.png') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+
+    </head>
+    <body class="is-preload">
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top">
+        <a class="navbar-brand">臉部辨識系統</a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ url_for('back') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('Emotions') }}">情感辨識</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('age') }}">年齡辨識</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+
+        <!-- Banner -->
+            <section id="banner">
+                <div class="inner">
+                    <h1>FaceDetect</h1>
+                    <p>臉部測試網站測試測試測試測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試部測試網站測試測試測試</p>
+                </div>
+            </section>
+
+        <!-- Footer -->
+                <div class="inner">
+                    <div class="content">
+                        <section>
+                            <h3>臉部偵測測試</h3>
+                            <p>臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試臉部偵測測試</p>
+                        </section>
+                        <section>
+                            <h4>超連結測試</h4>
+                            <ul class="alt">
+                                <li>情緒 <button type="button" class="btn btn-primary" onclick="location.href='{{ url_for('Emotions') }}'">點我前往</button></li>
+                                <li>年齡<button type="button" class="btn btn-success" onclick="location.href='{{ url_for('age') }}'">點我前往</button></li>
+                                <li>AAAA<button type="button" class="btn btn-info" >Info</button></li>
+                                <li>AAAA<button type="button" class="btn btn-danger">Danger</button></li>
+                            </ul>
+                        </section>
+                  </div>
+                </div>
+               
+
+        <!-- Scripts -->
+
+        <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='js/im.js')}}"></script>
+        <script src="{{url_for('static', filename='js/imgur.js')}}"></script>
+        <script src="{{url_for('static', filename='js/upload.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/util.js')}}"></script>
+        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    </body>
+</html>
