@@ -3,7 +3,7 @@ from flask import Flask, request, render_template, url_for, redirect
 import FaceRecog_Advanced_Library as FA
 import FaceRecog_Basic_Library 
 import FaceRecog_FaceList_Library
-import execjs
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
